@@ -46,10 +46,19 @@ describe("Accepts props and chilren", () => {
 });
 
 it("Handles a click event correctly", () => {
-  let num = 0;
+  const handleClick = jest.fn();
+  const wrapper = shallow(<Button onClick={handleClick}>Testing Click</Button>);
+  wrapper.find("button").props().onClick();
+  expect(handleClick).toHaveBeenCalledTimes(1);
+});
+
+it("Disables correctly", () => {
+  const handleClick = jest.fn();
   const wrapper = shallow(
-    <Button onClick={() => (num = 1)}>Testing Click</Button>
+    <Button disabled onClick={handleClick}>
+      Testing Click
+    </Button>
   );
-  wrapper.find("button").simulate("click");
-  expect(num).toEqual(1);
+  wrapper.find("button").props().onClick();
+  expect(handleClick).toHaveBeenCalledTimes(0);
 });

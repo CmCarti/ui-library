@@ -9,8 +9,19 @@ import getElevation from "../../helpers/getElevation";
 const Button: React.FC<
   ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>
 > = (props) => {
-  const { color = "primary", size = "md", elevation = 0 } = props;
+  const {
+    color = "primary",
+    size = "md",
+    elevation = 0,
+    disabled = false,
+    onClick = undefined,
+  } = props;
   const theme = useContext(ThemeContext);
+
+  function handleClick(e: React.MouseEvent) {
+    if (!disabled && onClick) onClick(e);
+  }
+
   let borderRadius = 5;
   let { padding, fontSize } = getButtonSize(size);
 
@@ -23,20 +34,39 @@ const Button: React.FC<
   const paddingClassName = getPaddingClassName(padding);
   const elevationClassName = getElevation(elevation);
 
-  className += `bg-${color} 
-                hover:bg-${color}-hover
-                text-${color}-text
-                hover:text-${color}-text-hover                
+  if (disabled) {
+    className += `bg-disabled 
+    hover:bg-disabled-hover
+    text-disabled-text
+    hover:text-disabled-text-hover
+    cursor-default
+    `;
+  }
+  if (!disabled) {
+    className += `bg-${color} 
+    hover:bg-${color}-hover
+    text-${color}-text
+    hover:text-${color}-text-hover
+    focus:ring-2
+    focus:ring-${color}
+    focus:ring-offset-2`;
+  }
+
+  className += `                               
                 border-radius-${borderRadius}px
                 ${paddingClassName}                 
                 text-${fontSize}
-                ${elevationClassName}
-                focus:ring-2
-                focus:ring-${color}
-                focus:ring-offset-2
+                ${elevationClassName}                
+                
                 `;
   return (
-    <button className={className} {...props}>
+    <button
+      {...props}
+      className={className}
+      onClick={onClick ? handleClick : undefined}
+      disabled={disabled}
+      aria-disabled={disabled}
+    >
       {props.children}
     </button>
   );
