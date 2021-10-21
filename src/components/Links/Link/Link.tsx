@@ -1,5 +1,11 @@
-import React, { AnchorHTMLAttributes, MouseEvent, useContext } from "react";
+import React, {
+  AnchorHTMLAttributes,
+  Children,
+  MouseEvent,
+  useContext,
+} from "react";
 import getPaddingClassName from "../../helpers/getPaddingClassName";
+import childrenHasBlockLevelElement from "../../helpers/isBlockLevelElement";
 import { ThemeContext } from "../../ThemeProvider/ThemeProvider";
 import LinkProps from "../models/LinkProps";
 
@@ -10,11 +16,13 @@ const Link: React.FC<LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>> = ({
   underline = false,
   hover = "color",
   target,
-  children,
   onClick,
   disabled = false,
+  children,
   ...props
 }) => {
+  let childrenHasBlockElement = childrenHasBlockLevelElement(children);
+
   if (typeof href !== "string") {
     console.warn(
       "You must provide a string to href for the link to work properly. Your prop will be overwritten with a blank string"
@@ -66,7 +74,7 @@ const Link: React.FC<LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>> = ({
       target={target}
       rel={target === "_blank" ? "noreferrer" : ""}
       onClick={handleClick}
-      className={className}
+      className={!childrenHasBlockElement ? className : props.className}
       {...props}
     >
       {children}
