@@ -13,5 +13,20 @@ const LinkStory = (props) => {
   return <Link {...props}>{props.label}</Link>;
 };
 
+const LinkStory2 = (props) => {
+  return (
+    <Link {...props}>
+      <div>
+        <p>
+          This is a test of the link component with block level components
+          inside.
+        </p>
+      </div>
+    </Link>
+  );
+};
+
 export const Standard = LinkStory.bind({});
 Standard.args = { label: "Basic Link" };
+
+export const Block = LinkStory2.bind({});
