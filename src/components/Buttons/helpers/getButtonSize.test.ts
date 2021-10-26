@@ -2,7 +2,7 @@ import getButtonSize from "./getButtonSize";
 
 const md = {
   fontSize: "base",
-  padding: ["1", "4"],
+  padding: ["1", "3"],
 };
 
 const xs = {

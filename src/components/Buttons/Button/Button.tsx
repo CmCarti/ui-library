@@ -15,6 +15,7 @@ const Button: React.FC<
     elevation = 0,
     disabled = false,
     onClick = undefined,
+    ...rest
   } = props;
   const theme = useContext(ThemeContext);
 
@@ -61,7 +62,7 @@ const Button: React.FC<
                 `;
   return (
     <button
-      {...props}
+      {...rest}
       className={className}
       onClick={onClick ? handleClick : undefined}
       disabled={disabled}

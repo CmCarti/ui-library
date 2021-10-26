@@ -8,7 +8,7 @@ interface ButtonSize {
 }
 
 export default function getButtonSize(size: ElementSize): ButtonSize {
-  const buttonSize: ButtonSize = { fontSize: "base", padding: ["1", "4"] };
+  const buttonSize: ButtonSize = { fontSize: "base", padding: ["1", "3"] };
 
   if (size === "xs") {
     buttonSize.fontSize = "xs";
@@ -24,7 +24,7 @@ export default function getButtonSize(size: ElementSize): ButtonSize {
   }
   if (size === "xl") {
     buttonSize.fontSize = "xl";
-    buttonSize.padding = ["1.5", "5"];
+    buttonSize.padding = ["1.5", "4"];
   }
   return buttonSize;
 }
