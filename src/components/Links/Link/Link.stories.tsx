@@ -1,32 +1,32 @@
 import React from "react";
-import Link from "./Link";
+import LinkComponent from "./Link";
 
 export default {
-  title: "Link",
-  component: Link,
+  title: "UI Components/Links/Link",
+  component: LinkComponent,
   argTypes: {
     label: { control: "text" },
   },
 };
 
 const LinkStory = (props) => {
-  return <Link {...props}>{props.label}</Link>;
+  return <LinkComponent {...props}>{props.label}</LinkComponent>;
 };
 
 const LinkStory2 = (props) => {
   return (
-    <Link {...props}>
+    <LinkComponent {...props}>
       <div>
         <p>
           This is a test of the link component with block level components
           inside.
         </p>
       </div>
-    </Link>
+    </LinkComponent>
   );
 };
 
-export const Standard = LinkStory.bind({});
-Standard.args = { label: "Basic Link" };
+export const Link = LinkStory.bind({});
+Link.args = { label: "Basic Link" };
 
-export const Block = LinkStory2.bind({});
+export const BlockLink = LinkStory2.bind({});

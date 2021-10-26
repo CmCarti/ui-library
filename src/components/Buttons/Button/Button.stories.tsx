@@ -1,9 +1,9 @@
 import React from "react";
-import Button from "./Button";
+import ButtonComponent from "./Button";
 
 export default {
-  title: "Button",
-  component: Button,
+  title: "UI Components/Buttons/Button",
+  component: ButtonComponent,
   argTypes: {
     label: { control: "text" },
   },
@@ -11,11 +11,11 @@ export default {
 
 const ButtonStory = (props) => {
   return (
-    <Button {...props} onClick={() => console.log("clicked")}>
+    <ButtonComponent {...props} onClick={() => console.log("clicked")}>
       {props.label}
-    </Button>
+    </ButtonComponent>
   );
 };
 
-export const Standard = ButtonStory.bind({});
-Standard.args = { label: "Basic Button" };
+export const Button = ButtonStory.bind({});
+Button.args = { label: "Basic Button" };
